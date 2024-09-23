@@ -1,16 +1,19 @@
 "use client";
 import React, { useRef, useEffect, useState } from "react";
+//import Image from "next/image";
 
-export default function page(props) {
+export default function Page(props) {
   const canvasRef = useRef(null);
-  const image = new Image();
+
   const [value, setValue] = useState("Hello");
   const [num3D, setNum3D] = useState([]);
   const [num2D, setNum2D] = useState([]);
   //const num = getRandomInteger(0, 999);
 
   useEffect(() => {
-    draw();
+    const image = new Image();
+    image.src = "./images/pic2.jpg";
+    draw(image);
     // image.onload = () => {
     //   console.log("Image loaded");
     //   context.drawImage(image, 0, 0);
@@ -24,7 +27,7 @@ export default function page(props) {
     return Math.floor(Math.random() * (max - min)) + min;
   };
 
-  const draw = () => {
+  const draw = (image) => {
     image.onload = async () => {
       const canvas = canvasRef.current;
       const context = canvas.getContext("2d");
@@ -153,8 +156,6 @@ export default function page(props) {
         }
       );
     };
-
-    image.src = "./images/pic2.jpg";
   };
 
   const writeLineCenter = (ctx, canvas) => {
