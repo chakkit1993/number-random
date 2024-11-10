@@ -194,6 +194,21 @@ export default function Page(props) {
     ctx.stroke();
   };
 
+  const handleDownloaded = (event) => {
+    console.log(event.target.value);
+    const canvas = canvasRef.current;
+    var dataURL = canvas.toDataURL();
+    downloadImage(dataURL, "my-canvas.jpeg");
+  };
+
+  // Save | Download image
+  function downloadImage(data, filename = "untitled.jpeg") {
+    var a = document.createElement("a");
+    a.href = data;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+  }
   const handleInputChange = (event) => {
     setValue(event.target.value);
     console.log(event.target.value);
@@ -278,7 +293,14 @@ export default function Page(props) {
         class="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
         type="button"
       >
-        Button
+        Generate
+      </button>
+      <button
+        onClick={handleDownloaded}
+        class="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
+        type="button"
+      >
+        Download
       </button>
     </div>
   );
