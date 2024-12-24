@@ -1,8 +1,16 @@
 "use client";
 import React, { useRef, useEffect, useState } from "react";
+import {
+  Button,
+  Input,
+  Card,
+  CardBody,
+  CardHeader,
+  CardFooter,
+} from "@nextui-org/react";
 //import Image from "next/image";
 
-export default function Page(props) {
+export default function RandomNumber(props) {
   const canvasRef = useRef(null);
 
   const [value, setValue] = useState("Hello");
@@ -273,35 +281,49 @@ export default function Page(props) {
   }
 
   return (
-    <div>
+    <div className=" w-full justify-center items-center space-y-4">
       <div>Home</div>
-      <div className="flex justify-center">
-        {" "}
-        <canvas ref={canvasRef} {...props} width={512} height={480} />
+      <div className="flex flex-row">
+        <Card className="m-2 flex-none w-96">
+          <CardHeader title="header"></CardHeader>
+          <CardBody title="body">
+            <div className="flex flex-col ">
+              <Input
+                className="flex-1"
+                type="text"
+                value={value}
+                onChange={handleInputChange}
+                onKeyUp={(e) => {
+                  //console.log(e.key);
+                }}
+              />
+              <Button
+                onPress={handleonClick}
+                className="flex-1 rounded-md bg-slate-800 m-2 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                type="button"
+              >
+                Generate
+              </Button>
+              <Button
+                onPress={handleDownloaded}
+                className="flex-1 rounded-md bg-slate-800 m-2 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                color="primary"
+                type="button"
+              >
+                Download
+              </Button>
+            </div>
+          </CardBody>
+          <CardFooter title="footer"></CardFooter>
+        </Card>
+        <Card className="m-2 flex-auto w-64">
+          <CardBody title="body">
+            <div className="flex justify-center">
+              <canvas ref={canvasRef} {...props} width={512} height={480} />
+            </div>
+          </CardBody>
+        </Card>
       </div>
-      <input
-        className="border-2 m-8"
-        type="text"
-        value={value}
-        onChange={handleInputChange}
-        onKeyUp={(e) => {
-          //console.log(e.key);
-        }}
-      />
-      <button
-        onClick={handleonClick}
-        class="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
-        type="button"
-      >
-        Generate
-      </button>
-      <button
-        onClick={handleDownloaded}
-        class="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
-        type="button"
-      >
-        Download
-      </button>
     </div>
   );
 }
